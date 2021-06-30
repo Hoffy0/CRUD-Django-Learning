@@ -1,0 +1,6 @@
+<a href="{% url 'Tareas' %}">Volver</a>
+<form method="POST">
+    {% csrf_token %}
+    <h3>¿Estas seguro que quieres eliminar la tarea "{{task}}"?</h3>
+    <input type="submit" value="Borrar">
+</form>

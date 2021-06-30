@@ -1,0 +1,8 @@
+<h1>Login</h1>
+<a href="{% url 'Tareas' %}">Volver</a>
+<form method="POST" action="">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Login">
+    <p>No tienes una cuenta? <a href="{% url 'Register' %}">Registrate Aqui</a></p>
+</form>
