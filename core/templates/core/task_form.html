@@ -1,7 +1,14 @@
-<h1>Crear tarea</h1>
-<a href="{% url 'Tareas' %}">Volver</a>
-<form method="POST" action="">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="Crear">
-</form>
+{% extends 'core/index.html' %}
+
+{% block content %}
+    <div class="header-bar">
+        <a href="{% url 'Tareas' %}"> <i class="fas fa-long-arrow-alt-left"></i> Volver </a>
+    </div>
+   <div class="card-body">
+        <form method="POST" action="">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input class="button" type="submit" value="Crear">
+        </form>
+   </div>
+{% endblock content %}

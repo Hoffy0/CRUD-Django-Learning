@@ -1,6 +1,14 @@
-<a href="{% url 'Tareas' %}">Volver</a>
-<form method="POST">
-    {% csrf_token %}
-    <h3>¿Estas seguro que quieres eliminar la tarea "{{task}}"?</h3>
-    <input type="submit" value="Borrar">
-</form>
+{% extends 'core/index.html' %}
+
+{% block content %}
+    <div class="header-bar">
+        <a href="{% url 'Tareas' %}"> <i class="fas fa-long-arrow-alt-left"></i> Volver </a>
+    </div>
+    <div class="card-body">
+        <form method="POST">
+            {% csrf_token %}
+            <h3>¿Estas seguro que quieres eliminar la tarea "{{task}}"?</h3>
+            <input class="button" type="submit" value="Borrar">
+        </form>
+    </div>
+{% endblock content %}

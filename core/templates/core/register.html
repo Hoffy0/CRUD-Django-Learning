@@ -1,7 +1,15 @@
-<h1>Registrar</h1>
-<a href="{% url 'Tareas' %}">Volver</a>
-<form method="POST" action="">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="Registrar">
-</form>
+{% extends 'core/index.html' %}
+
+{% block content %}
+    <div class="header-bar">
+        <h1>Registrar</h1>
+    </div>
+    <div class="card-body">
+        <form method="POST" action="">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input class="button" type="submit" value="Registrar">
+        </form>
+        <p>Ya tienes una cuenta? <a href="{% url 'Register' %}">Ingresa Aqui</a></p>
+    </div>
+{% endblock content %}

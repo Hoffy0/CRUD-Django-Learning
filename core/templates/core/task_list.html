@@ -1,31 +1,67 @@
-{% if request.user.is_authenticated %}
-    <p>{{request.user}}</p>
-    <a href="{% url 'Logout' %}"> Salir </a>
-{% else %}
-    <a href="{% url 'Login' %}">Entrar</a>
-    <a href="">Registrarse</a>
-{% endif %}
-<hr>
-<h1>Lista por hacer</h1>
-<a href="{% url 'CrearTarea' %}">Crear Tarea</a>
+{% extends 'core/index.html' %}
 
-<table>
-    <tr>
-        <th>Tarea:</th>
-        <th></th>
-        <th></th>
-        <th></th>
-    </tr>
-    {% for task in tasks %}
-    <tr>
-        <td> {{task.title}} </td>
-        <td>
-            <a href="{% url 'Tarea' task.id %}"> Ver </a>
-            <a href="{% url 'ActualizarTarea' task.id %}">Modificar</a>
-            <a href="{% url 'EliminarTarea' task.id %}">Eliminar</a>
-        </td>
-    </tr>
-    {% empty %}
-        <h3>Sin tareas</h3>
-    {% endfor %}
-</table>
+{% block content %}
+    <div class="header-bar">
+        <div>
+            <h1 class="saludo" id="saludo">{{request.user|title}}</h1>
+            <h3>Tienes <i>{{count}}</i> tarea{{count|pluralize:"s"}} pendiente{{count|pluralize:"s"}}</h3>
+        </div>
+        {% if request.user.is_authenticated %}
+            <a href="{% url 'Logout' %}"> <i class="fas fa-sign-out-alt"></i> </a>
+        {% endif %}
+    </div>
+
+   
+    <hr>
+    
+    <div id="search-add-wrapper">
+        <h1>Lista de tareas</h1>
+        <a id="add-link" href="{% url 'CrearTarea' %}"> <i class="fas fa-plus-square"></i> </a>
+    </div>
+
+    <div class="task-items-wrapper">
+        {% for task in tasks %}
+        <div class="task-wrapper">
+            {% if task.isComplete %}
+                <div class="task-title">
+                    <div class="task-complete-icon"></div>
+                    <i><s><a href="{% url 'Tarea' task.id %}"> {{task}} </a></s></i>
+                </div>
+            {% else %}
+                <div class="task-title">
+                    <div class="task-incomplete-icon"></div>
+                    <a href="{% url 'Tarea' task.id %}"> {{task}} </a>
+                </div>
+            {% endif %}
+            <div>
+                <a class="update-link" href="{% url 'ActualizarTarea' task.id %}"> <i class="fas fa-edit"></i> </a>
+                <a class="delete-link" href="{% url 'EliminarTarea' task.id %}"> <i class="fas fa-trash-alt"></i> </a>
+            </div>
+        </div>
+        {% empty %}
+            <h3>Sin tareas</h3>
+        {% endfor %}
+    </div>
+
+    <!-- <table>
+        <tr>
+            <th>Tarea:</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        {% for task in tasks %}
+        <tr>
+            <td> {{task.title}} </td>
+            <td>
+                <a href="{% url 'Tarea' task.id %}"> Ver </a>
+                <a href="{% url 'ActualizarTarea' task.id %}">Modificar</a>
+                <a href="{% url 'EliminarTarea' task.id %}">Eliminar</a>
+            </td>
+        </tr>
+        {% empty %}
+            <h3>Sin tareas</h3>
+        {% endfor %}
+    </table> -->
+
+{% endblock content %}

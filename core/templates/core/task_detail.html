@@ -1,2 +1,9 @@
-<h1>Tarea: {{task.title}}</h1>
-<p>{{task.desc}}</p>
+{% extends 'core/index.html' %}
+
+{% block content %}
+    <div class="header-bar">
+        <a href="{% url 'Tareas' %}"> <i class="fas fa-long-arrow-alt-left"></i> Volver </a>
+    </div>
+    <h1>Tarea: {{task.title}}</h1>
+    <p>{{task.desc}}</p>
+{% endblock content %}
